@@ -3,7 +3,17 @@ function init(){
   getItems();
 
   // Azione per aggiungere un item alla lista Su API
-  $('#new-to-do').click(postItem);
+  $('#new-to-do').click(function(){
+
+    var newinput = $('#new-input').val();
+
+    if (newinput.length === 0) {
+      alert("inserisci una cosa da fare");
+    }else {
+      postItem(newinput);
+    }
+
+  });
 
 
 
@@ -57,9 +67,7 @@ function getItems(){
 }
 
 //Aggiungo un ToDoItem da chiamata POST
-function postItem(){
-
-  var newinput = $('#new-input').val();
+function postItem(input){
 
   $.ajax({
 
@@ -67,17 +75,14 @@ function postItem(){
     method: "POST",
 
     data:{
-      text: newinput,
+      text: input,
     },
 
     success: function(data){
-      console.log("NEW INPUT LENGTH", newinput.length);
-      if (newinput.length === 0) {
-        alert("inserisci un valore numerico");
-      }else{
-        //Richiamo la funzione per ottenere i nuovi dati dall'api
-        getItems();
-      }
+      console.log("NEW INPUT LENGTH", input.length);
+
+      //Richiamo la funzione per ottenere i nuovi dati dall'api
+      getItems();
 
     },
     error: function(error){
