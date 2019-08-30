@@ -9,6 +9,11 @@
   list-style: none;
 }
 
+body{
+  background-color: black;
+  color: white;
+}
+
 .container{
   width: 100vw;
   height: auto;
@@ -60,4 +65,8 @@ li{
 
   margin: auto;
   padding: 10px;
+}
+
+span.delete{
+  float: right;
 }
