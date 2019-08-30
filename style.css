@@ -25,7 +25,7 @@ input{
   color: white;
   font-weight: bold;
   font-size: 18px;
-
+  border: none;
 }
 
 input#new-input{
@@ -69,4 +69,19 @@ li{
 
 span.delete{
   float: right;
+  height: 100%;
+}
+
+input:hover{
+  color: black;
+  background-color: rgba(0, 0, 0, 0.3);
+}
+
+input[type="button"]:hover{
+  cursor: pointer;
+}
+
+span.delete:hover{
+  cursor: no-drop;
+  color: black;
 }

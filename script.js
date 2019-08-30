@@ -5,6 +5,15 @@ function init(){
   // Azione per aggiungere un item alla lista Su API
   $('#new-to-do').click(postItem);
 
+  //Azione per eliminare un elemento dalla lista
+  $(document).on("click", ".delete", function(){
+
+    var thisid = $(this).data("id");
+
+    deleteItem(thisid);
+
+  });
+
 
 };
 
@@ -21,7 +30,10 @@ function getItems(){
     method: "GET",
 
     success: function(data){
-
+      //Ripulisco il campo di input
+      $('#new-input').val("");
+      //Ripulisto il container degli elementi in HTML
+      $('ul.container .box').remove();
       // Ciclo tutti i dati della lista per estrapolere i valori da dare ad Handlebars
       for (var i = 0; i < data.length; i++) {
 
@@ -59,14 +71,35 @@ function postItem(){
     },
 
     success: function(data){
-      //Ripulisto il container degli elementi in HTML
-      $('ul.container .box').remove();
+
       //Richiamo la funzione per ottenere i nuovi dati dall'api
       getItems();
     },
     error: function(error){
       alert("Errore chiamata POST: ", error);
       console.log("POST ITEM" ,error);
+    }
+  });
+}
+
+//Elimino Item della ToDoList in base al click
+function deleteItem(id){
+
+  console.log("THIS id: ", id);
+  $.ajax({
+
+    url: "http://157.230.17.132:3000/todos/" + id,
+    method: "DELETE",
+
+    success: function(data){
+
+      //Se tutto va bene richiamo la funzione per ristampare gli elementi aggiornati
+      getItems();
+      console.log("id Item Cancellato: ", id);
+    },
+    error: function(error){
+      alert("errore chiamata DELETE");
+      console.log("ERROR DELETE:", error);
     }
   });
 }
