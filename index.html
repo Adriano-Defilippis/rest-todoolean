@@ -18,12 +18,12 @@
     <!-- TEMPLATE: MESSAGE MENU -->
     <script id="item-template" type="text/x-handlebars-template">
 
-      <div class="box">
+      <li class="box">
 
-        <p class="delete" data-id="{{id}}">X</p>
-        <h3>{{text}}</h3>
+        <span class="delete" data-id="{{id}}">X</span>
+        <span>{{text}}</span>
 
-      </div>
+      </li>
 
     </script>
 
@@ -38,14 +38,14 @@
   <body>
 
     <input type="text" id="newtodoitem" name="" value="">
-    <button id="submit" type="button" name="button">Aggiungi una cosa da fare</button>
+    <input id="submit" type="button" name="button" value="Aggiungi una cosa da fare">
 
-    <div class="container">
+    <h1>ToDoList:</h1>
+    <ul class="container">
 
-      <h1>ToDoList:</h1>
 
 
-    </div>
+    </ul>
 
   </body>
 </html>

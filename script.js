@@ -1,108 +1,54 @@
 function init(){
 
   getItems();
-  $(document).on("click", ".delete", deleteItem);
-  $(document).on("click", "#submit", getInputText);
+
 
 
 };
 
 $(document).ready(init);
 
-function clearItems(){
 
-  $(".container").html("");
-
-}
-
-
+// Prendo la ToDoList da una chiamata GET
 function getItems(){
 
-  clearItems();
+  var target = $('ul.container');
 
   $.ajax({
-
-    url: "http://157.230.17.132:3003/todos",
+    url: "http://157.230.17.132:3000/todos",
     method: "GET",
 
     success: function(data){
 
-      printItems(data);
+      for (var i = 0; i < data.length; i++) {
+        var d = data[i];
+
+        itemTemplate(
+          {
+           id: d.id,
+           text: d.text
+          }, target);
+      }
+
+
     },
-    error: function(){
-      alert("Errore richiesta todolist");
+    error: function(error){
+      alert("errore chiamata api");
+      console.log(error);
     }
   });
+
 }
 
+// Funzione per stampare tramite handlebars
+function itemTemplate(obj, target){
 
 
-function printItems(items){
-
-  var target = $('.container');
-  var source = $('#item-template').html();
+  var source = $("#item-template").html();
   var template = Handlebars.compile(source);
 
-  for (var i = 0; i < items.length; i++) {
-    var item = items[i];
+  var context = obj;
 
-    var context = {
-      text: item.text,
-      id: item.id
-    };
-
-    var html = template(context);
-    target.append(html);
-
-  }
-}
-
-
-function deleteItem(){
-
-  var element = $(this);
-  var parent = element.parent();
-  var id = element.data("id");
-
-  console.log(id);
-
-  $.ajax({
-
-    url: "http://157.230.17.132:3003/todos/" + id,
-    method: "DELETE",
-
-    success: function(){
-
-      console.log("ID elemento eliminato: ", id );
-
-      parent.remove();
-
-
-    },
-  });
-
-}
-
-function getInputText(){
-
-  var newitem = $('#newtodoitem').val();
-
-  console.log("Testo inserito: ", newitem);
-
-  $.ajax({
-
-    url: "http://157.230.17.132:3003/todos",
-    method: "POST",
-    data: {
-      text: newitem
-    },
-
-    success: function(data){
-
-      getItems();
-    },
-    error: function(){
-      alert("Errore POST element nel server");
-    }
-  });
+  var html = template(context);
+  target.append(html)
 }
