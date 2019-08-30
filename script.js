@@ -1,17 +1,17 @@
 function init(){
-
+  //Chiamata per avere la lista da api
   getItems();
 
   // Azione per aggiungere un item alla lista Su API
   $('#new-to-do').click(postItem);
 
+
+
   //Azione per eliminare un elemento dalla lista
   $(document).on("click", ".delete", function(){
 
     var thisid = $(this).data("id");
-
     deleteItem(thisid);
-
   });
 
 
@@ -71,9 +71,14 @@ function postItem(){
     },
 
     success: function(data){
+      console.log("NEW INPUT LENGTH", newinput.length);
+      if (newinput.length === 0) {
+        alert("inserisci un valore numerico");
+      }else{
+        //Richiamo la funzione per ottenere i nuovi dati dall'api
+        getItems();
+      }
 
-      //Richiamo la funzione per ottenere i nuovi dati dall'api
-      getItems();
     },
     error: function(error){
       alert("Errore chiamata POST: ", error);

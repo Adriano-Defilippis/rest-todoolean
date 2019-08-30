@@ -67,6 +67,12 @@ li{
   padding: 10px;
 }
 
+li::after{
+  display: table;
+  content: "";
+  clear: both;
+}
+
 span.delete{
   float: right;
   height: 100%;
