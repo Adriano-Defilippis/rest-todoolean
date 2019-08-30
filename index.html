@@ -19,10 +19,8 @@
     <script id="item-template" type="text/x-handlebars-template">
 
       <li class="box">
-
-        <span class="delete" data-id="{{id}}">X</span>
         <span>{{text}}</span>
-
+        <span class="delete" data-id="{{id}}">X</span>
       </li>
 
     </script>
@@ -37,15 +35,18 @@
   </head>
   <body>
 
-    <input type="text" id="newtodoitem" name="" value="">
-    <input id="submit" type="button" name="button" value="Aggiungi una cosa da fare">
-
-    <h1>ToDoList:</h1>
-    <ul class="container">
 
 
+      <h1>ToDoList:</h1>
+      <ul class="container">
+        <li id="item_input">
+          <input type="text" id="new-input" name="" value="">
+          <input id="new-to-do" type="button" name="button" value="Add ToDo">
+        </li>
+      </ul>
 
-    </ul>
+
+
 
   </body>
 </html>
